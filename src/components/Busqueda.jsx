@@ -1,13 +1,8 @@
 import React from 'react'
 import { useState } from 'react'
 
-const clientesIniciales = [
-    { id: 1, nombre: "Laura González", telefono: "644123123" },
-    { id: 2, nombre: "Carlos Ruiz", telefono: "655321321" },
-    { id: 3, nombre: "Marta Pérez", telefono: "699112233" },
-];
 
-function Busqueda() {
+function Busqueda({ clientesIniciales }) {
     const [campoBusqueda, setCampoBusqueda] = useState("");
 
     const cambioInput = (e) => {
@@ -36,17 +31,19 @@ function Busqueda() {
             <div>
                 <h3>Resultado de la búsqueda:</h3>
                 <ul>
-                    {clientesFiltrados.map((cliente) => (
-                        <li key={cliente.id}>
-                            {cliente.nombre} - {cliente.telefono}
-                        </li>
-                    ))}
+                    {clientesFiltrados.length > 0 ? (
+                        clientesFiltrados.map((cliente) => (
+                            <li key={cliente.id}>
+                                {cliente.nombre} - {cliente.telefono}
+                            </li>
+                        ))
+                    ) : (
+                        <p>
+                            No hay clientes que coincidan con la búsqueda.
+                        </p>
+                    )}
                 </ul>
 
-                {/* Si no se encuentran clientes se muestra un mensaje indicándolo */}
-                {clientesFiltrados.length === 0 && (
-                    <p>No hay clientes que coincidan con la búsqueda.</p>
-                )}
             </div>
         </div>
     );
