@@ -1,32 +1,57 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 import ListaClientes from './components/ListaClientes';
 import Busqueda from './components/Busqueda';
-
-// ARRAY DE CLIENTES 
-const clientesIniciales = [
-    { id: 1, nombre: "Laura González", telefono: "644123123" },
-    { id: 2, nombre: "Carlos Ruiz", telefono: "655321321" },
-    { id: 3, nombre: "Marta Pérez", telefono: "699112233" },
-    { id: 4, nombre: "Javier López", telefono: "611000111" },
-    { id: 5, nombre: "Ana Torres", telefono: "622999888" },
-    { id: 6, nombre: "Pedro Sanz", telefono: "633777666" },
-    { id: 7, nombre: "Elena Ramos", telefono: "644555444" },
-    { id: 8, nombre: "Miguel Castro", telefono: "655333222" },
-    { id: 9, nombre: "Sofía Gil", telefono: "666111000" },
-    { id: 10, nombre: "Ricardo Vidal", telefono: "677888999" },
-    { id: 11, nombre: "Paula Marín", telefono: "688444333" },
-    { id: 12, nombre: "Fernando Díaz", telefono: "699222111" },
-    { id: 13, nombre: "Beatriz Soto", telefono: "611333555" }
-];
+import { arrayClientes } from './assets/clientes';
 
 
 function App() {
+  const [clientes, setClientes] = useState(null);
+  const [cargando, setCargando] = useState(true);
+  const [error, setError] = useState(false);
+
+  useEffect(() => {
+    // PONER EN TRUE PARA MOSTRAR EL MENSAJE DE ERROR
+    const fallo = false;
+
+    const timerCargaCliente = setTimeout(() => {
+      if (fallo) {
+        setError(true);
+      } else {
+        setClientes(arrayClientes);
+      }
+
+      setCargando(false);
+    }, 2000);
+
+    return (() => {
+      clearTimeout(timerCargaCliente);
+    });
+
+  }, [arrayClientes]);
+
+  if (error) {
+    return (
+      <div>
+        Error al cargar los datos
+      </div>
+    );
+  }
+
+  if (cargando) {
+    return (
+      <div>
+        Cargando clientes...
+      </div>
+    );
+  }
 
   return (
     <>
-      <ListaClientes clientesIniciales= {clientesIniciales}/>
-      <Busqueda clientesIniciales= {clientesIniciales}/>
+
+      <ListaClientes clientesIniciales={clientes} />
+      <Busqueda clientesIniciales={clientes} />
+
     </>
   )
 }

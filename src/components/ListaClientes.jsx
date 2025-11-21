@@ -1,11 +1,10 @@
-import React from 'react'
 import { useState } from 'react'
 
 
 function ListaClientes({ clientesIniciales }) {
-    const [paginaActual, setPaginaActual] = useState(1)
-    const [clientesPorPagina, setClientesPorPagina] = useState(5)
-    const [critOrdenacion, setCritOrdenacion] = useState({ clave: 'nombre', direccion: 'ascending' })
+    const [paginaActual, setPaginaActual] = useState(1);
+    const [clientesPorPagina, setClientesPorPagina] = useState(5);
+    const [critOrdenacion, setCritOrdenacion] = useState({ clave: 'nombre', direccion: 'ascending' });
 
 
     const getClientesOrdenados = () => {
@@ -43,7 +42,6 @@ function ListaClientes({ clientesIniciales }) {
         if (critOrdenacion.clave === clave && critOrdenacion.direccion === 'ascending') {
             direccion = 'descending';
         }
-
         setCritOrdenacion({ clave, direccion });
     };
 
