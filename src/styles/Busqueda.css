@@ -1,0 +1,117 @@
+/* Contenedor Principal */
+.busqueda-contenedor {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+    border-top: 5px solid #007bff;
+    /* Línea de acento */
+}
+
+.busqueda-titulo {
+    color: #333;
+    font-size: 1.8em;
+    margin-bottom: 25px;
+}
+
+/* Grupo de Input (para el input y el botón de limpiar) */
+.input-grupo {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+    position: relative;
+    justify-content: center;
+}
+
+.input-busqueda {
+    flex-grow: 1;
+    padding: 12px 40px 12px 15px;
+    /* Espacio para el icono de limpieza */
+    font-size: 1em;
+    border: 2px solid #ccc;
+    border-radius: 6px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.input-busqueda:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+    outline: none;
+}
+
+.boton-limpiar {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #dc3545;
+    /* Rojo para el botón de cerrar */
+    font-size: 1.2em;
+    cursor: pointer;
+    padding: 0;
+}
+
+/* Resultados */
+.resultados-seccion {
+    padding: 15px;
+    border: 1px solid #eee;
+    border-radius: 6px;
+    background-color: #f8f9fa;
+}
+
+.resultados-titulo {
+    font-size: 1.2em;
+    color: #555;
+    margin-top: 0;
+    margin-bottom: 15px;
+    padding-bottom: 5px;
+    border-bottom: 1px dashed #ddd;
+}
+
+.lista-resultados {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 0;
+    list-style: none;
+    /* Quitamos los puntos de la lista */
+}
+
+/* Tarjeta de Cliente */
+.tarjeta-cliente {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 15px;
+    background-color: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    transition: background-color 0.2s, box-shadow 0.2s;
+}
+
+.tarjeta-cliente:hover {
+    background-color: #e9f7ff;
+    box-shadow: 0 2px 5px rgba(0, 123, 255, 0.1);
+}
+
+.cliente-nombre {
+    font-weight: bold;
+    color: #007bff;
+    font-size: 1.1em;
+}
+
+.cliente-telefono {
+    color: #6c757d;
+}
+
+.mensaje-vacio {
+    text-align: center;
+    color: #999;
+    padding: 20px;
+    font-style: italic;
+}

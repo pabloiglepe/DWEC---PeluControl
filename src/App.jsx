@@ -49,7 +49,7 @@ function App() {
   return (
     <>
 
-      <ListaClientes clientesIniciales={clientes} />
+      <ListaClientes />
       <Busqueda clientesIniciales={clientes} />
 
     </>

@@ -1,14 +1,17 @@
 import { useState } from 'react'
+import { arrayClientes } from '../assets/clientes';
+import '../styles/ListaClientes.css'
 
 
-function ListaClientes({ clientesIniciales }) {
+function ListaClientes() {
     const [paginaActual, setPaginaActual] = useState(1);
     const [clientesPorPagina, setClientesPorPagina] = useState(5);
     const [critOrdenacion, setCritOrdenacion] = useState({ clave: 'nombre', direccion: 'ascending' });
+    const [clientes, setClientes] = useState(arrayClientes);
 
 
     const getClientesOrdenados = () => {
-        let clientesOrdenados = [...clientesIniciales];
+        let clientesOrdenados = [...clientes];
         if (critOrdenacion !== null) {
             clientesOrdenados.sort((a, b) => {
                 const valorA = a[critOrdenacion.clave];
@@ -53,55 +56,84 @@ function ListaClientes({ clientesIniciales }) {
 
     const indiceUltimoCliente = paginaActual * clientesPorPagina;
     const indicePrimerCliente = indiceUltimoCliente - clientesPorPagina;
-    const clientesDisponiblesPorpAgina = [3, 5, clientesIniciales.length];
+    const clientesDisponiblesPorpAgina = [3, 5, clientes.length];
 
     const clientesActuales = clientesOrdenados.slice(indicePrimerCliente, indiceUltimoCliente);
 
-    const numTotalPaginas = Math.ceil(clientesIniciales.length / clientesPorPagina);
+    const numTotalPaginas = Math.ceil(clientes.length / clientesPorPagina);
 
     return (
-        <div>
-            <h1>Lista completa de clientes: </h1>
+        <div className="lista-clientes-contenedor">
+            <header className="lista-clientes-header">
+                <h1>Lista completa de clientes</h1>
+                <button className="boton-primario">Añadir Cliente</button>
+            </header>
+
+            <button>Añadir Cliente</button>
 
             {/* RESULTADOS POR PÁGINA */}
-            <div>
-                <label htmlFor="clientesPorPagina"> Clientes por página: </label>
-                <select id="clientesPorPagina" value={clientesPorPagina} onChange={manejadorResultPorPagina}>
-                    {clientesDisponiblesPorpAgina.map((num) => (
-                        <option key={num} value={num}>
-                            {num === clientesIniciales.length ? `Todos (${num})` : num}
-                        </option>
-                    ))}
-                </select>
-            </div>
+            <div className="control-ordenamiento">
+                <div>
+                    <label htmlFor="clientesPorPagina"> Clientes por página: </label>
+                    <select id="clientesPorPagina" value={clientesPorPagina} onChange={manejadorResultPorPagina}>
+                        {clientesDisponiblesPorpAgina.map((num) => (
+                            <option key={num} value={num}>
+                                {num === clientes.length ? `Todos (${num})` : num}
+                            </option>
+                        ))}
+                    </select>
+                </div>
 
-            {/* ENCABEZADO DE ORDENAMIENTO */}
-            <div>
-                <button onClick={() => manejadorOrdenamiento('nombre')} > Nombre {indicadorDeOrden('nombre')}</button>
-                <button onClick={() => manejadorOrdenamiento('telefono')} > Teléfono {indicadorDeOrden('telefono')}</button>
-            </div>
 
+                {/* ENCABEZADO DE ORDENAMIENTO */}
+                <div className="control-ordenamiento">
+                    <span style={{ marginRight: '10px' }}>Ordenar por:</span>
+                    <button onClick={() => manejadorOrdenamiento('nombre')} > Nombre {indicadorDeOrden('nombre')}</button>
+                    <button onClick={() => manejadorOrdenamiento('telefono')} > Teléfono {indicadorDeOrden('telefono')}</button>
+                </div>
+            </div>
 
             {/* LISTA DE CLIENTES */}
-            <ul>
+            {/* <ul>
                 {clientesActuales.map((cliente) => (
                     <li key={cliente.id}>{cliente.nombre} - {cliente.telefono}</li>
                 ))}
-            </ul>
+            </ul> */}
+
+            <table className="tabla-clientes">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Teléfono</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {clientesActuales.length > 0 ? (
+                        clientesActuales.map((cliente) => (
+                            <tr key={cliente.id} className="fila-cliente">
+                                <td>{cliente.nombre}</td>
+                                <td>{cliente.telefono}</td>
+                            </tr>
+                        ))
+                    ) : (
+                        <tr>
+                            <td colSpan="2" className="sin-clientes">No hay clientes para mostrar en esta página.</td>
+                        </tr>
+                    )}
+                </tbody>
+            </table>
 
             {/* CONTROL DE PAGINACIÓN */}
-            <div>
+            <div className="control-paginacion">
                 <button onClick={() => manejadorCambioPagina(paginaActual - 1)} disabled={paginaActual === 1} >
                     &larr; Anterior
                 </button>
 
-                <span>
+                <span className="info-paginacion">
                     Página {paginaActual} de {numTotalPaginas}
                 </span>
 
-                <button
-                    onClick={() => manejadorCambioPagina(paginaActual + 1)}
-                    disabled={paginaActual === numTotalPaginas}>
+                <button onClick={() => manejadorCambioPagina(paginaActual + 1)} disabled={paginaActual === numTotalPaginas}>
                     Siguiente &rarr;
                 </button>
             </div>

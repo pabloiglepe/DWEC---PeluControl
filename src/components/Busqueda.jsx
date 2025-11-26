@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import '../styles/Busqueda.css'
 
 
 function Busqueda({ clientesIniciales }) {
@@ -23,26 +24,31 @@ function Busqueda({ clientesIniciales }) {
     });
 
     return (
-        <div>
-            <h2>Busca al cliente que quieres encontrar: </h2>
-            <input type="text" value={campoBusqueda} onChange={cambioInput} />
+        <div className="busqueda-contenedor">
+            <h2 className="busqueda-titulo">Busca al cliente que quieres encontrar: </h2>
 
-            <div>
-                <h3>Resultado de la búsqueda:</h3>
-                <ul>
-                    {clientesFiltrados.length > 0 ? (
-                        clientesFiltrados.map((cliente) => (
-                            <li key={cliente.id}>
-                                {cliente.nombre} - {cliente.telefono}
-                            </li>
-                        ))
-                    ) : (
-                        <p>
-                            No hay clientes que coincidan con la búsqueda.
-                        </p>
-                    )}
-                </ul>
+            <div className="input-grupo">
+                <input type="text" value={campoBusqueda} onChange={cambioInput} placeholder='🔎'/>
+            </div>
 
+            <div className="resultados-seccion">
+                <h3 className="resultados-titulo">Resultado de la búsqueda:</h3>
+                {clientesFiltrados.length > 0 ? (
+                    clientesFiltrados.map((cliente) => (
+                        <div key={cliente.id} className="tarjeta-cliente">
+                            <span className="cliente-nombre">
+                                {cliente.nombre}
+                            </span>
+                            <span className="cliente-telefono">
+                                📞 {cliente.telefono}
+                            </span>
+                        </div>
+                    ))
+                ) : (
+                    <p className="mensaje-vacio">
+                        No hay clientes que coincidan con la búsqueda.
+                    </p>
+                )}
             </div>
         </div>
     );
