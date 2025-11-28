@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { arrayClientes } from '../assets/clientes';
+import Busqueda from './Busqueda';
 import '../styles/ListaClientes.css'
 
 
@@ -69,8 +70,6 @@ function ListaClientes() {
                 <button className="boton-primario">Añadir Cliente</button>
             </header>
 
-            <button>Añadir Cliente</button>
-
             {/* RESULTADOS POR PÁGINA */}
             <div className="control-ordenamiento">
                 <div>
@@ -137,6 +136,9 @@ function ListaClientes() {
                     Siguiente &rarr;
                 </button>
             </div>
+
+                    
+            <Busqueda clientesIniciales={clientes} />
         </div>
     );
 }

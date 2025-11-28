@@ -1,4 +1,3 @@
-/* Base del contenedor */
 .lista-clientes-contenedor {
     max-width: 900px;
     margin: 40px auto;
@@ -9,7 +8,6 @@
     font-family: Arial, sans-serif;
 }
 
-/* Encabezado */
 .lista-clientes-header {
     display: flex;
     justify-content: space-between;
@@ -24,9 +22,8 @@
     font-size: 2em;
 }
 
-/* Botón principal */
 .boton-primario {
-    background-color: #007bff;
+    background-color: #8c00ff;
     color: white;
     border: none;
     padding: 10px 15px;
@@ -37,10 +34,9 @@
 }
 
 .boton-primario:hover {
-    background-color: #0056b3;
+    background-color: #8c00ff;
 }
 
-/* Controles Superiores */
 .controles-superiores {
     display: flex;
     justify-content: space-between;
@@ -62,7 +58,6 @@
     border: 1px solid #ccc;
 }
 
-/* Ordenamiento */
 .control-ordenamiento {
     display: flex;
     gap: 10px;
@@ -84,12 +79,10 @@
 }
 
 .boton-ordenamiento.activo {
-    background-color: #28a745; /* Color diferente para el criterio activo */
+    background-color: #28a745; 
     font-weight: bold;
 }
 
-
-/* Tabla de Clientes */
 .tabla-clientes {
     width: 100%;
     border-collapse: collapse;
@@ -105,7 +98,7 @@
 }
 
 .tabla-clientes th {
-    background-color: #007bff;
+    background-color: #8c00ff;
     color: white;
     text-transform: uppercase;
     font-size: 0.9em;
@@ -116,7 +109,7 @@
 }
 
 .fila-cliente:hover {
-    background-color: #e2f4ff; /* Resaltar fila al pasar el mouse */
+    background-color: #f1e0ff; 
 }
 
 .sin-clientes {
@@ -126,7 +119,6 @@
     padding: 20px;
 }
 
-/* Control de Paginación */
 .control-paginacion {
     display: flex;
     justify-content: center;

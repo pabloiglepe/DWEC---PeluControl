@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import './App.css'
 import ListaClientes from './components/ListaClientes';
-import Busqueda from './components/Busqueda';
 import { arrayClientes } from './assets/clientes';
 
 
@@ -50,7 +49,6 @@ function App() {
     <>
 
       <ListaClientes />
-      <Busqueda clientesIniciales={clientes} />
 
     </>
   )
