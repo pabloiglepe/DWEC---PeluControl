@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import './App.css'
 import ListaClientes from './components/ListaClientes';
 import { arrayClientes } from './assets/clientes';
+import Busqueda from './components/Busqueda';
 
 
 function App() {
@@ -47,9 +48,16 @@ function App() {
 
   return (
     <>
+      <div className="main">
 
-      <ListaClientes />
+        <div className="section">
+          <ListaClientes />
+        </div>
 
+        <div className="section">
+          <Busqueda clientesIniciales={clientes} />
+        </div>
+      </div>
     </>
   )
 }

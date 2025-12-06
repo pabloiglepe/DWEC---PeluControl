@@ -6,6 +6,8 @@
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     font-family: Arial, sans-serif;
+    border-top: 5px solid #8c00ff;
+
 }
 
 .lista-clientes-header {
@@ -62,6 +64,7 @@
     display: flex;
     gap: 10px;
     align-items: center;
+    color: black;
 }
 
 .boton-ordenamiento {
@@ -79,7 +82,7 @@
 }
 
 .boton-ordenamiento.activo {
-    background-color: #28a745; 
+    background-color: #28a745;
     font-weight: bold;
 }
 
@@ -91,7 +94,8 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
-.tabla-clientes th, .tabla-clientes td {
+.tabla-clientes th,
+.tabla-clientes td {
     padding: 12px 15px;
     text-align: left;
     border-bottom: 1px solid #ddd;
@@ -106,10 +110,15 @@
 
 .fila-cliente:nth-child(even) {
     background-color: #f2f2f2;
+
+}
+
+.fila-cliente {
+    color: black;
 }
 
 .fila-cliente:hover {
-    background-color: #f1e0ff; 
+    background-color: #f1e0ff;
 }
 
 .sin-clientes {

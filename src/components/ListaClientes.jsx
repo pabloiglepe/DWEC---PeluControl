@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { arrayClientes } from '../assets/clientes';
 import Busqueda from './Busqueda';
 import '../styles/ListaClientes.css'
+import FormularioCrearCliente from './FormularioCrearCliente';
 
 
 function ListaClientes() {
@@ -9,7 +10,28 @@ function ListaClientes() {
     const [clientesPorPagina, setClientesPorPagina] = useState(5);
     const [critOrdenacion, setCritOrdenacion] = useState({ clave: 'nombre', direccion: 'ascending' });
     const [clientes, setClientes] = useState(arrayClientes);
+    const [mostrarFormulario, setMostrarFormulario] = useState(false);
 
+    const agregarCliente = (datosCliente) => {
+        setClientes((clientesPrevios) => {
+            const maxId = clientesPrevios.length > 0 ? Math.max(...clientesPrevios.map(c => c.id)) : 0;
+            const nextId = maxId + 1;
+
+            const nuevoCliente = {
+                id: nextId,
+                nombre: datosCliente.nombre,
+                telefono: datosCliente.telefono,
+            };
+
+            const nuevosClientes = [...clientesPrevios, nuevoCliente];
+
+            // Calculamos la última página
+            const nuevoNumTotalPaginas = Math.ceil(nuevosClientes.length / clientesPorPagina);
+            setPaginaActual(nuevoNumTotalPaginas);
+
+            return nuevosClientes;
+        });
+    };
 
     const getClientesOrdenados = () => {
         let clientesOrdenados = [...clientes];
@@ -37,7 +59,7 @@ function ListaClientes() {
     }
 
     const manejadorResultPorPagina = (e) => {
-        setClientesPorPagina(e.target.value);
+        setClientesPorPagina(Number(e.target.value));
         setPaginaActual(1);
     }
 
@@ -66,9 +88,16 @@ function ListaClientes() {
     return (
         <div className="lista-clientes-contenedor">
             <header className="lista-clientes-header">
-                <h1>Lista completa de clientes</h1>
-                <button className="boton-primario">Añadir Cliente</button>
+                <h1>PeluControl</h1>
+                <button className="boton-primario" onClick={() => setMostrarFormulario(true)}>Añadir Cliente</button>
             </header>
+
+            {mostrarFormulario && (
+                <FormularioCrearCliente
+                    guardarCliente={agregarCliente}
+                    mostrarForm={setMostrarFormulario}
+                />
+            )}
 
             {/* RESULTADOS POR PÁGINA */}
             <div className="control-ordenamiento">
@@ -137,8 +166,8 @@ function ListaClientes() {
                 </button>
             </div>
 
-                    
-            <Busqueda clientesIniciales={clientes} />
+
+            
         </div>
     );
 }
