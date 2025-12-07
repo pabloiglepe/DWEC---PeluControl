@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { arrayClientes } from '../assets/clientes';
-import Busqueda from './Busqueda';
 import '../styles/ListaClientes.css'
 import FormularioCrearCliente from './FormularioCrearCliente';
 
