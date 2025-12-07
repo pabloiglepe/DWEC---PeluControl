@@ -9,6 +9,32 @@ function FormularioCrearCliente({ guardarCliente, mostrarForm }) {
     });
 
     const [error, setError] = useState('');
+    const [errorCampos, setErrorCampos] = useState({});
+
+    const validarCampos = (nombre, telefono) => {
+        let esValido = true;
+        const errores = {};
+
+        if (nombre.length === 0) {
+            errores.nombre = "El nombre es obligatorio";
+            esValido = false;
+        }
+
+        const telefonoNumerico = telefono.replace(/[^0-9]/g, '');
+
+        if (telefonoNumerico.length === 0) {
+            errores.telefono = "El telefono es obligatorio";
+            esValido = false;
+        }
+
+        if (telefonoNumerico.length < 9) {
+            errores.telefono = "El telefono debe tener al menos 9 digitos y ser numérico";
+            esValido = false;
+        }
+
+        setErrorCampos(errores)
+        return esValido;
+    }
 
     const manejadorCambio = (e) => {
         const { name, value } = e.target;
@@ -16,7 +42,8 @@ function FormularioCrearCliente({ guardarCliente, mostrarForm }) {
             ...datosPrevios,
             [name]: value
         }));
-        setError('');
+        setErrorCampos(prev => ({ ...prev, [name]: '' }));
+        setError('')
     }
 
     const manejadorEnvio = (e) => {
@@ -25,14 +52,14 @@ function FormularioCrearCliente({ guardarCliente, mostrarForm }) {
         const nombreSanitizado = datosForm.nombre.trim();
         const telefonoSanitizado = datosForm.telefono.trim();
 
-        if (!nombreSanitizado || !telefonoSanitizado) {
-            setError("Debes rellenar el nombre y el teléfono");
-        }
-
-
         const datosClientes = {
             nombre: nombreSanitizado,
             telefono: telefonoSanitizado,
+        }
+
+        if (!validarCampos(nombreSanitizado, telefonoSanitizado)) {
+            setError('Por favor, corrige los errores en el formulario.');
+            return; 
         }
 
 
@@ -44,12 +71,11 @@ function FormularioCrearCliente({ guardarCliente, mostrarForm }) {
         mostrarForm(false);
     }
 
+
     return (
         <div className="formulario-modal-overlay">
             <form className="formulario-crear-cliente" onSubmit={manejadorEnvio}>
                 <h3>Nuevo Cliente</h3>
-
-                {error && <p className="mensaje-error">{error}</p>}
 
                 <div className="form-group">
                     <label htmlFor="nombre">Nombre:</label>
@@ -58,10 +84,10 @@ function FormularioCrearCliente({ guardarCliente, mostrarForm }) {
                         id="nombre"
                         name="nombre"
                         placeholder="Nombre completo"
-                        required
                         value={datosForm.nombre}
-                        onChange={manejadorCambio}
-                    />
+                        onChange={manejadorCambio} />
+
+                    {errorCampos.nombre && <p className="error-campo">{errorCampos.nombre}</p>}
                 </div>
 
                 <div className="form-group">
@@ -71,9 +97,11 @@ function FormularioCrearCliente({ guardarCliente, mostrarForm }) {
                         id="telefono"
                         name="telefono"
                         placeholder="Ej: 644123123"
-                        required
                         value={datosForm.telefono}
                         onChange={manejadorCambio} />
+
+                    {errorCampos.telefono && <p className="error-campo">{errorCampos.telefono}</p>}
+
                 </div>
 
                 <div className="form-actions">

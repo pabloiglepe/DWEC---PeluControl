@@ -8,7 +8,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1000; 
+    z-index: 1000;
 }
 
 .formulario-crear-cliente {
@@ -74,7 +74,7 @@
 }
 
 .mensaje-error {
-    color: #dc3545; 
+    color: #dc3545;
     background-color: #f8d7da;
     border: 1px solid #f5c6cb;
     padding: 10px;
@@ -83,3 +83,12 @@
     text-align: center;
     font-size: 0.9em;
 }
+
+.error-campo {
+    color: #dc3545;
+    /* Rojo */
+    font-size: 0.85em;
+    margin-top: 5px;
+    font-weight: bold;
+}
+
